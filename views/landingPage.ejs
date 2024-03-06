@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ronak Bhojayya - Authentication</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Mukta+Mahee:wght@200;300;400;500;600;700;800&display=swap");
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(255, 255, 255, 0.301),
+            rgba(0, 0, 0, 0.764)
+          ),
+          url("/bg1.jpg");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: "Mukta Mahee", sans-serif;
+      }
+
+      .container {
+        width: 80%;
+        max-width: 1200px;
+        height: 100vh;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+      }
+
+      h1 {
+        color: #f0f0f0;
+        font-size: 36px;
+      }
+      h4 {
+        color: #d4d4d4;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        font-weight: 300;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+      }
+     
+      .button {
+        background-color: #1178c1;
+        color: #fdfdfd;
+        border: none;
+        padding: 10px 30px;
+        border-radius: 30px;
+        margin: 0 10px;
+        cursor: pointer;
+        font-size: 18px;
+        text-decoration: none;
+        transition: 0.3s ease-in-out;
+        font-weight: 700;
+      }
+
+      .button:hover {
+        background-color: #ffffff;
+        color: #000000;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.579);
+        position: absolute;
+        bottom: 40px;
+      }
+
+      @media screen and (max-width: 600px) {
+        .container {
+          padding: 50px 10px;
+        }
+        h1 {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav>
+      <div class="title">Ronak Bhojayya</div>
+      <div class="pages">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/login">Sign In</a></li>
+          <li><a href="/register">Sign Up</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Welcome to Authentication project</h1>
+      <h4>
+        Tech Stack includes Node.js, Express.js, Ejs Rendering Engine, MongoDb
+      </h4>
+      <div class="button-container">
+        <a href="/login" class="button">Sign In</a>
+        <a href="/register" class="button">Sign Up</a>
+      </div>
+      
+        <p>Project by Ronak Bhojayya</p>
+      
+    </div>
+  </body>
+</html>
