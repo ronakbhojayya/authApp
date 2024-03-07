@@ -17,7 +17,7 @@
             rgba(255, 255, 255, 0.301),
             rgba(0, 0, 0, 0.764)
           ),
-          url("/bg1.jpg");
+          url("/bg2.jpg");
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
@@ -75,6 +75,13 @@
         position: absolute;
         bottom: 40px;
       }
+
+      h4 {
+        color: #d4d4d4;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        font-weight: 300;
+      }
     </style>
   </head>
   <body>
@@ -93,7 +100,8 @@
       </div>
     </nav>
     <div class="container">
-      <h1>Logged in!</h1>
+      <h1>Welcome <%= username%>!</h1>
+      <h4>hey <%= username%>, what's going on?</h4>
       <div class="button-container">
         <form action="/logout" method="post">
           <button type="submit" id="logoutBtn">Logout</button>

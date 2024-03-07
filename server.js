@@ -12,6 +12,7 @@ const path = require("path");
 const User = require("./models/user");
 
 const bcrypt = require("bcryptjs");
+const flush = require("connect-flash");
 
 //database connection
 
@@ -45,11 +46,15 @@ app.use(
   session({
     secret: "secret key",
     resave: false,
+    cookie: { maxAge: 6000 },
     saveUninitialized: false,
     store: store,
   })
 );
 
+app.use(flush());
+
+//isAuth middleware
 const isAuth = (req, res, next) => {
   if (req.session.isAuth) {
     next();
@@ -66,11 +71,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-  res.render("register", { title: "Sign Up" });
+  res.render("register", { msg: req.flash("msg") });
 });
 
 app.get("/login", (req, res) => {
-  res.render("login", { title: "Sign In" });
+  res.render("login", { msg: req.flash("msg") });
 });
 
 app.post("/register", async (req, res) => {
@@ -79,18 +84,21 @@ app.post("/register", async (req, res) => {
   let user = await User.findOne({ email });
 
   if (user) {
+    req.flash("msg", "Already existing user");
     return res.redirect("/register");
+  } else {
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    user = new User({
+      username,
+      email,
+      password: hashedPassword,
+    });
+
+    await user.save();
+    req.flash("msg", "User account created");
+    res.redirect("/login");
   }
-  const hashedPassword = await bcrypt.hash(password, 12);
-
-  user = new User({
-    username,
-    email,
-    password: hashedPassword,
-  });
-
-  await user.save();
-  res.redirect("/login");
 });
 
 app.post("/login", async (req, res) => {
@@ -99,22 +107,23 @@ app.post("/login", async (req, res) => {
   let user = await User.findOne({ username });
 
   if (!user) {
-    res.redirect("/login");
+    req.flash("msg", "incorrect username");
+    return res.redirect("/login");
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
 
   if (!isMatch) {
-    res.redirect("/login");
+    req.flash("msg", "incorrect password");
+    return res.redirect("/login");
   }
   req.session.isAuth = true;
-  res.redirect("/dashboard");
+  const data = username;
+  res.redirect(`/dashboard?data=${data}`);
 });
 
 app.get("/dashboard", isAuth, (req, res) => {
-  const { username } = req.body;
-  res.render("dashboard");
-  console.log(username);
+  res.render("dashboard", { username: req.query.data});
 });
 app.post("/logout", (req, res) => {
   req.session.destroy((err) => {
