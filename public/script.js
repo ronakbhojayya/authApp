@@ -13,3 +13,15 @@ function loadSignIn() {
     "#signIn"
   ).innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
 }
+
+document.querySelector("#bt1").addEventListener("click", () => {
+  document.querySelector(
+    "#bt1"
+  ).innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
+});
+
+document.querySelector("#bt2").addEventListener("click", () => {
+  document.querySelector(
+    "#bt2"
+  ).innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
+});
