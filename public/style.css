@@ -191,3 +191,8 @@ nav .pages ul a:hover {
   color: #ededed;
   text-decoration: none;
 }
+
+i{
+  color: black;
+  font-size: 18px;
+}
