@@ -46,7 +46,7 @@ app.use(
   session({
     secret: "secret key",
     resave: false,
-    cookie: { maxAge: 6000 },
+    cookie: { maxAge: 600000 },
     saveUninitialized: false,
     store: store,
   })
@@ -67,15 +67,15 @@ const isAuth = (req, res, next) => {
 
 //routes
 app.get("/", (req, res) => {
-  res.render("landingPage", { title: "Landing Page" });
+  res.render("landingPage", { title: "Home Page" });
 });
 
 app.get("/register", (req, res) => {
-  res.render("register", { msg: req.flash("msg") });
+  res.render("register", { msg: req.flash("msg"), title: "Sign Up" });
 });
 
 app.get("/login", (req, res) => {
-  res.render("login", { msg: req.flash("msg") });
+  res.render("login", { msg: req.flash("msg"), title: "Sign In" });
 });
 
 app.post("/register", async (req, res) => {
@@ -123,7 +123,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/dashboard", isAuth, (req, res) => {
-  res.render("dashboard", { username: req.query.data});
+  res.render("dashboard", { username: req.query.data , title: "Welcome "});
 });
 app.post("/logout", (req, res) => {
   req.session.destroy((err) => {
