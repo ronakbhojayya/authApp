@@ -59,6 +59,11 @@
         color: white;
         transition: 0.3 ease-in-out;
       }
+      h3 {
+        color: rgb(226, 226, 226);
+        font-size: 18px;
+        font-weight: 400;
+      }
 
       @media screen and (max-width: 600px) {
         .container {
@@ -66,6 +71,58 @@
         }
         h1 {
           font-size: 28px;
+        }
+      }
+
+      @media screen and (max-width: 414px) {
+        .container {
+          padding: 50px 10px;
+        }
+        h1 {
+          font-size: 28px;
+        }
+      }
+
+      @media screen and (max-width: 430px) {
+        nav .title {
+          font-size: 15px;
+        }
+
+        nav .pages {
+          width: 8rem;
+          display: none;
+        }
+      }
+      @media screen and (max-width: 414px) {
+        nav .title {
+          font-size: 15px;
+        }
+
+        nav .pages {
+          width: 8rem;
+          display: none;
+        }
+      }
+
+      @media screen and (max-width: 380px) {
+        .button {
+          width: 7rem;
+          font-size: 12px;
+        }
+      }
+
+      @media screen and (max-width: 433px) {
+        .box {
+          display: none;
+        }
+        .box-err {
+          display: block;
+        }
+      }
+
+      @media screen and (max-width: 320px) {
+        .box-err h3 {
+          font-size: 13px;
         }
       }
     </style>
@@ -86,13 +143,25 @@
       <%if(msg.length>0) { %>
       <div class="msgBox"><%- msg%></div>
       <%}%>
-
+      <div class="box-err">
+        <h3>Enable desktop mode to continue Sign Up</h3>
+      </div>
       <div class="box">
-        <form action="/register" method="post" class="form" onsubmit="loadSignUp()">
+        <form
+          action="/register"
+          method="post"
+          class="form"
+          onsubmit="loadSignUp()"
+        >
           <h2>Sign Up</h2>
           <div class="inputFname">
             <label for="fname">Username</label>
-            <input type="text" name="username" placeholder="Username" required/>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              required
+            />
           </div>
           <div class="inputFname">
             <label for="email">Email</label>
@@ -100,7 +169,11 @@
           </div>
           <div class="inputPassword">
             <label for="password">Password</label>
-            <input type="password" name="password" placeholder="password" required
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              required
             />
           </div>
           <div class="input-password">
