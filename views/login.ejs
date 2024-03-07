@@ -53,6 +53,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 1rem;
         background: rgba(0, 0, 0, 0.2);
         backdrop-filter: blur(8px);
         border-radius: 10px;
@@ -142,7 +143,14 @@
     </nav>
     <div class="container">
       <%if(msg.length>0) { %>
-      <div class="msgBox"><%- msg%></div>
+      <div class="msgBox">
+        <%if(msg[0]==='incorrect username' || msg[0]==='incorrect password' || msg[0]==='Already existing user'  ) { %>
+          <img src="/error.png" alt="error"><%=msg%>
+          <%}%>
+          <%if(msg[0]==='User account created') {%>
+            <img src="/success.png" alt="success"><%=msg%>
+          <%}%>
+      </div>
       <%}%>
       <div class="box-err">
         <h3>Enable desktop mode to continue Sign Up</h3>
@@ -177,7 +185,7 @@
             <button type="submit" class="password" id="signIn">Sign In</button>
           </div>
           <p class="bottomLink">
-            Not registered yet?
+            Dont have an account yet?
             <a href="/register" class="link"> Sign Up </a>
           </p>
         </form>

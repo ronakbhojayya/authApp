@@ -1,6 +1,6 @@
 setTimeout(function () {
   document.querySelector(".msgBox").style.display = "none";
-}, 5000);
+}, 4000);
 
 function loadSignUp() {
   document.querySelector(

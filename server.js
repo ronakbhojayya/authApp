@@ -67,7 +67,8 @@ const isAuth = (req, res, next) => {
 
 //routes
 app.get("/", (req, res) => {
-  res.render("landingPage", { title: "Home Page" });
+  console.log(req.query.isOut);
+  res.render("landingPage", {  msg: req.query.isOut, title: "Home Page" });
 });
 
 app.get("/register", (req, res) => {
@@ -83,6 +84,11 @@ app.post("/register", async (req, res) => {
 
   let user = await User.findOne({ email });
 
+  if (user) {
+    req.flash("msg", "Already existing user");
+    return res.redirect("/register");
+  }
+  user = await User.findOne({ username });
   if (user) {
     req.flash("msg", "Already existing user");
     return res.redirect("/register");
@@ -119,18 +125,24 @@ app.post("/login", async (req, res) => {
   }
   req.session.isAuth = true;
   const data = username;
-  res.redirect(`/dashboard?data=${data}`);
+  req.flash("msg", "Signed In");
+  res.redirect(`/dashboard?user=${data}`);
 });
 
 app.get("/dashboard", isAuth, (req, res) => {
-  res.render("dashboard", { username: req.query.data , title: "Welcome "});
+  res.render("dashboard", {
+    msg: req.flash("msg"),
+    username: req.query.user,
+    title: "Welcome ",
+  });
 });
 app.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       throw err;
     }
-    res.redirect("/");
+    isOut = 'Signed Out';
+    res.redirect(`/?isOut=${isOut}`);
   });
 });
 
