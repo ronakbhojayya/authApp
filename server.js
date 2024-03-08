@@ -85,12 +85,12 @@ app.post("/register", async (req, res) => {
   let user = await User.findOne({ email });
 
   if (user) {
-    req.flash("msg", "Already existing user");
+    req.flash("msg", "Already existing email");
     return res.redirect("/register");
   }
   user = await User.findOne({ username });
   if (user) {
-    req.flash("msg", "Already existing user");
+    req.flash("msg", "Already existing username");
     return res.redirect("/register");
   } else {
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -141,7 +141,8 @@ app.post("/logout", (req, res) => {
     if (err) {
       throw err;
     }
-    isOut = 'Signed Out';
+    
+     isOut = 'Signed Out';
     res.redirect(`/?isOut=${isOut}`);
   });
 });

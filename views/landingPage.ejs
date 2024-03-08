@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
     <title>Ronak Bhojayya</title>
     <link rel="stylesheet" href="style.css" />
     <link
@@ -61,7 +62,7 @@
         margin-top: 40px;
       }
 
-      .button {
+      /* .button {
         background-color: #bc681a;
         width: 10rem;
         color: #fdfdfd;
@@ -74,11 +75,54 @@
         text-decoration: none;
         transition: 0.3s ease-in-out;
         font-weight: 700;
-      }
+      } */
 
-      .button:hover {
+      /* .button:hover {
         background-color: #ffffff;
         color: #bc681a;
+      } */
+
+      .button {
+        background-color: #bc681a;
+        width: 9rem;
+        color: #fdfdfd;
+        
+        padding: 15px 30px;
+        border-radius: 30px;
+        margin: 0 10px;
+        cursor: pointer;
+        font-size: 18px;
+        text-decoration: none;
+        transition: 0.3s ease-in-out;
+        font-weight: 700;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition:  0.4s ease-in-out;
+      }
+      .button::before{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0%;
+        background-color: #fdfdfd;
+        color: #bc681a;
+        content: '';
+        z-index: -1;
+        transition:  0.3s ease-in-out;
+        border-radius: 30px;
+      }
+
+      .button:hover{
+        color: #bc681a;
+        
+        background-color: #fdfdfd;
+      }
+
+      .button:hover::before{
+        width: 100%;
+        
       }
 
       p {
@@ -86,6 +130,12 @@
         position: absolute;
         bottom: 40px;
       }
+
+      a{
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
 
       @media screen and (max-width: 600px) {
         .container {
@@ -147,16 +197,50 @@
         backdrop-filter: blur(8px);
         border-radius: 10px;
         color: white;
-        transition: 0.3 ease-in-out;
+        transition: 0.3s ease-in-out;
+        z-index: 99;
+      }
+
+      .overlay{
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        color: #f0f0f0;
+        display: flex;
+        gap: 1rem;
+      }
+
+      .circle{
+        background-color: #bc681a;
+        color: #fdfdfd;
+        height: 4rem;
+        width: 4rem;
+        padding: 1rem;
+        border-radius: 50%;
+        transition: 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .circle:hover{
+        background-color: #fdfdfd;
+        color: #bc681a;
+      }
+
+      .circle i {
+        font-size: 2rem;
       }
 
      
     </style>
   </head>
   <body>
+    <div class="overlay">
+      <a href="mailto:ronakbhojayya@gmail.com"><div class="circle"><i class="fa-solid fa-envelope"></i></div></a>
+    </div>
     <!-- navbar -->
     <nav>
-      <div class="title">Ronak Bhojayya</div>
+      <div class="title"><a href="/">Ronak Bhojayya</a></div>
       <div class="pages">
         <ul>
           <li><a href="/">Home</a></li>

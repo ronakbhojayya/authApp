@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title%></title>
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -65,6 +66,59 @@
         font-size: 18px;
         font-weight: 400;
       }
+
+      .msgBox {
+        height: 2rem;
+        padding: 2rem 4rem;
+        background-color: rgb(0, 248, 62);
+        position: fixed;
+        top: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(8px);
+        border-radius: 10px;
+        color: white;
+        transition: 0.3 ease-in-out;
+        z-index: 99;
+      }
+      a{
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .overlay{
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        color: #f0f0f0;
+        display: flex;
+        gap: 1rem;
+      }
+
+      .circle{
+        background-color: #bc681a;
+        color: #fdfdfd;
+        height: 4rem;
+        width: 4rem;
+        padding: 1rem;
+        border-radius: 50%;
+        transition: 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .circle:hover{
+        background-color: #fdfdfd;
+        color: #bc681a;
+      }
+
+      .circle i {
+        font-size: 2rem;
+      }
+
 
       @media screen and (max-width: 600px) {
         .container {
@@ -129,9 +183,12 @@
     </style>
   </head>
   <body>
+    <div class="overlay">
+      <a href="mailto:ronakbhojayya@gmail.com"><div class="circle"><i class="fa-solid fa-envelope"></i></div></a>
+    </div>
     <!-- navbar -->
     <nav>
-      <div class="title">Ronak Bhojayya</div>
+      <div class="title"><a href="/">Ronak Bhojayya</a></div>
       <div class="pages">
         <ul>
           <li><a href="/">Home</a></li>
@@ -141,9 +198,11 @@
       </div>
     </nav>
     <div class="container">
-      <%if(msg.length>0) { %>
-      <div class="msgBox"><%- msg%></div>
-      <%}%>
+      <%if(msg[0]==='Already existing email' || msg[0]==='Already existing username' ) { %>
+        <div class="msgBox">
+        <img src="/error.png" alt="error"><%=msg%>
+      </div>
+        <%}%>
       <div class="box-err">
         <h3>Enable desktop mode to continue Sign Up</h3>
       </div>
@@ -160,7 +219,7 @@
             <input
               type="text"
               name="username"
-              placeholder="Username"
+              placeholder="username"
               required
             />
           </div>
