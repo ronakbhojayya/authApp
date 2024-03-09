@@ -187,7 +187,7 @@
         <%if(msg[0]==='incorrect username' || msg[0]==='incorrect password' || msg[0]==='Already existing email' || msg[0]==='Already existing username' ) { %>
           <img src="/error.png" alt="error"><%=msg%>
           <%}%>
-          <%if(msg[0]==='User account created') {%>
+          <%if(msg[0]==='User account created and mail sent') {%>
             <img src="/success.png" alt="success"><%=msg%>
           <%}%>
       </div>

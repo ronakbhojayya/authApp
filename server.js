@@ -13,6 +13,7 @@ const User = require("./models/user");
 
 const bcrypt = require("bcryptjs");
 const flush = require("connect-flash");
+const nodemailer = require("nodemailer");
 
 //database connection
 
@@ -68,7 +69,7 @@ const isAuth = (req, res, next) => {
 //routes
 app.get("/", (req, res) => {
   console.log(req.query.isOut);
-  res.render("landingPage", {  msg: req.query.isOut, title: "Home Page" });
+  res.render("landingPage", { msg: req.query.isOut, title: "Home Page" });
 });
 
 app.get("/register", (req, res) => {
@@ -102,7 +103,31 @@ app.post("/register", async (req, res) => {
     });
 
     await user.save();
-    req.flash("msg", "User account created");
+    // email sending
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'ronakbhojayya23@gmail.com',
+        pass: 'yfwt dmfb jwit iaeq'
+      }
+    });
+    
+    var mailOptions = {
+      from: 'ronakbhojayya23@gmail.com',
+      to: email,
+      subject: `Hi, ${username} you have successfully created your account!`,
+      text: `Thanks for Signing Up ${username}!`
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+    //email end
+    req.flash("msg", "User account created and mail sent");
     res.redirect("/login");
   }
 });
@@ -141,8 +166,8 @@ app.post("/logout", (req, res) => {
     if (err) {
       throw err;
     }
-    
-     isOut = 'Signed Out';
+
+    isOut = "Signed Out";
     res.redirect(`/?isOut=${isOut}`);
   });
 });
